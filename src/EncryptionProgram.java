@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -21,7 +22,7 @@ public class EncryptionProgram {
         letters = new char[1000];
 
         newKey();
-        askQuestion();
+        // askQuestion();
     }
 
     private void askQuestion() {
@@ -39,10 +40,10 @@ public class EncryptionProgram {
                     getKey();
                     break;
                 case 'E':
-                    encrypt();
+                    encrypt("fitness.txt");
                     break;
                 case 'D':
-                    decrypt();
+                    decrypt("pacer.txt");
                     break;
                 case 'Q':
                     quit();
@@ -97,10 +98,10 @@ public class EncryptionProgram {
         System.out.println();
     }
 
-    private void encrypt() {
+    protected void encrypt(String filename) {
         System.out.println("Enter a message to be encrypted: ");
 
-        try (FileReader reader = new FileReader("fitness.txt")) {
+        try (FileReader reader = new FileReader(filename)) {
             int data = reader.read();
             int i = 0;
             while (data != -1) {
@@ -132,19 +133,27 @@ public class EncryptionProgram {
             }
         }
         System.out.println("Encrypted: ");
-        for (char x : letters) {
-            System.out.print(x);
+        try {
+            FileWriter writer = new FileWriter(filename);
+            writer.write(String.valueOf(letters));
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+
+        System.out.print(String.valueOf(letters));
+
         System.out.println();
     }
 
-    private void decrypt() {
+    protected void decrypt(String filename) {
         System.out.println("Enter a message to be decrypted: ");
         // String message = scanner.nextLine();
 
         // letters = message.toCharArray();
 
-        try (FileReader reader = new FileReader("pacer.txt")) {
+        try (FileReader reader = new FileReader(filename)) {
             int data = reader.read();
             int i = 0;
             while (data != -1) {
@@ -171,9 +180,7 @@ public class EncryptionProgram {
             }
         }
         System.out.println("Decrypted: ");
-        for (char x : letters) {
-            System.out.print(x);
-        }
+        System.out.print(String.valueOf(letters));
         System.out.println();
 
     }
