@@ -98,7 +98,7 @@ public class EncryptionProgram {
         System.out.println();
     }
 
-    protected void encrypt(String filename) {
+    protected String encrypt(String filename) {
         System.out.println("Enter a message to be encrypted: ");
 
         try (FileReader reader = new FileReader(filename)) {
@@ -145,9 +145,10 @@ public class EncryptionProgram {
         System.out.print(String.valueOf(letters));
 
         System.out.println();
+        return String.valueOf(letters);
     }
 
-    protected void decrypt(String filename) {
+    protected String decrypt(String filename) {
         System.out.println("Enter a message to be decrypted: ");
         // String message = scanner.nextLine();
 
@@ -179,10 +180,29 @@ public class EncryptionProgram {
                 }
             }
         }
+        try {
+            FileWriter writer = new FileWriter("decrypted contents.txt");
+            writer.write(String.valueOf(letters));
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println("Decrypted: ");
         System.out.print(String.valueOf(letters));
         System.out.println();
+        return String.valueOf(letters);
+    }
 
+    protected void saveDecryption(String saveString, String file) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(saveString);
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     private void quit() {
