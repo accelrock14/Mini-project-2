@@ -8,7 +8,7 @@ import java.awt.Desktop;
 
 public class Buttons extends JFrame implements ActionListener {
 
-    JButton decryptButton = new JButton("Decrypt");
+    JButton decryptButton = new JButton();
     JButton encryptButton = new JButton("Encrypt");
     JButton saveButton = new JButton("Save");
     EncryptionProgram encryptor = new EncryptionProgram();
@@ -32,7 +32,6 @@ public class Buttons extends JFrame implements ActionListener {
         this.add(decryptButton);
         this.add(encryptButton);
         this.add(saveButton);
-        // this.pack();
         this.setSize(400, 400);
         this.setLayout(null);
         this.setVisible(true);
@@ -52,10 +51,8 @@ public class Buttons extends JFrame implements ActionListener {
 
             if (response == JFileChooser.APPROVE_OPTION) {
                 file = new File("decrypted contents.txt");
-                // System.out.println(file);
                 filename = fileChooser.getSelectedFile().getAbsolutePath();
                 decryptedString = encryptor.decrypt(filename);
-                // new DecryptionProgram(decryptedString);
                 try {
                     desktop.open(file);
                 } catch (IOException e1) {
