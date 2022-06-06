@@ -13,8 +13,8 @@ public class EncryptionProgram {
     private char[] letters;
 
     EncryptionProgram() {
-        list = new ArrayList();
-        shuffledList = new ArrayList();
+        list = new ArrayList<Character>();
+        shuffledList = new ArrayList<Character>();
         character = ' ';
         letters = new char[1000];
 
@@ -74,15 +74,7 @@ public class EncryptionProgram {
                 }
             }
         }
-
-        try {
-            FileWriter writer = new FileWriter(filename);
-            writer.write(String.valueOf(letters));
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        fileWriter(String.valueOf(letters), filename);
         return String.valueOf(letters);
     }
 
@@ -113,22 +105,15 @@ public class EncryptionProgram {
                 }
             }
         }
+        fileWriter(String.valueOf(letters), "decrypted contents.txt");
 
-        try {
-            FileWriter writer = new FileWriter("decrypted contents.txt");
-            writer.write(String.valueOf(letters));
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         return String.valueOf(letters);
     }
 
-    protected void saveDecryption(String saveString, String file) {
+    protected void fileWriter(String fileContents, String file) {
         try {
             FileWriter writer = new FileWriter(file);
-            writer.write(saveString);
+            writer.write(fileContents);
             writer.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block

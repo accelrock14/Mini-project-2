@@ -2,24 +2,25 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-
 import javax.swing.*;
 import java.awt.Desktop;
 
 public class Buttons extends JFrame implements ActionListener {
 
-    JButton decryptButton = new JButton();
+    JButton decryptButton = new JButton("Decrypt");
     JButton encryptButton = new JButton("Encrypt");
     JButton saveButton = new JButton("Save");
-    EncryptionProgram encryptor = new EncryptionProgram();
-    Desktop desktop = Desktop.getDesktop();
-    File file;
+    EncryptionProgram encryptor;
+    Desktop desktop;
     String filename;
     String decryptedString;
 
     Buttons() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
+
+        encryptor = new EncryptionProgram();
+        desktop = Desktop.getDesktop();
 
         decryptButton.addActionListener(this);
         encryptButton.addActionListener(this);
@@ -50,15 +51,9 @@ public class Buttons extends JFrame implements ActionListener {
             // int response = fileChooser.showSaveDialog(null); //select file to save
 
             if (response == JFileChooser.APPROVE_OPTION) {
-                file = new File("decrypted contents.txt");
                 filename = fileChooser.getSelectedFile().getAbsolutePath();
                 decryptedString = encryptor.decrypt(filename);
-                try {
-                    desktop.open(file);
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                fileOpener("decrypted contents.txt");
             }
         }
         if (e.getSource() == encryptButton) {
@@ -71,18 +66,21 @@ public class Buttons extends JFrame implements ActionListener {
 
             if (response == JFileChooser.APPROVE_OPTION) {
                 filename = fileChooser.getSelectedFile().getAbsolutePath();
-                file = new File(filename);
                 decryptedString = encryptor.encrypt(filename);
             }
         }
         if (e.getSource() == saveButton) {
-            encryptor.saveDecryption(decryptedString, filename);
-            try {
-                desktop.open(new File(filename));
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            encryptor.fileWriter(decryptedString, filename);
+            fileOpener(filename);
+        }
+    }
+
+    private void fileOpener(String filename) {
+        try {
+            desktop.open(new File(filename));
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
         }
     }
 }
