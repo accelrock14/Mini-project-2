@@ -30,6 +30,9 @@ public class Buttons extends JFrame implements ActionListener {
         encryptButton.setBounds(200, 100, 100, 25);
         saveButton.setBounds(150, 200, 100, 25);
 
+        ImageIcon icon = new ImageIcon("Icon.png");
+        this.setIconImage(icon.getImage());
+
         this.add(decryptButton);
         this.add(encryptButton);
         this.add(saveButton);

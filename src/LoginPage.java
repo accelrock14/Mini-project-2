@@ -36,6 +36,9 @@ public class LoginPage implements ActionListener {
         resetButton.setFocusable(false);
         resetButton.addActionListener(this);
 
+        ImageIcon icon = new ImageIcon("Icon.png");
+        frame.setIconImage(icon.getImage());
+
         frame.add(userIDLabel);
         frame.add(userPasswordLabel);
         frame.add(messageLabel);
