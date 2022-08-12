@@ -11,7 +11,7 @@ public class IDandPasswords {
         logininfo.put("kevin", "abc123");
     }
 
-    public HashMap getLoginInfo() {
-        return logininfo;
-    }
+    // public HashMap getLoginInfo() {
+    // return logininfo;
+    // }
 }

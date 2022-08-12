@@ -3,7 +3,7 @@ public class App {
 
         IDandPasswords idandPasswords = new IDandPasswords();
 
-        new LoginPage(idandPasswords.getLoginInfo());
+        new LoginPage(idandPasswords.logininfo);
 
         // new Buttons();
     }
